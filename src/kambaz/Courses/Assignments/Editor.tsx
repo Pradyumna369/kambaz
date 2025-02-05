@@ -59,7 +59,7 @@ export default function AssignmentEditor() {
         </tr><br />     
         <tr>
           <td align="right" valign="top"></td>
-          <td name="Entry Options">
+          <td data-name="Entry Options">
             Online Entry Options <br />
             <form>
               <input type="checkbox" id="wd-text-entry" name="options" value="Text Entry"/>
@@ -119,8 +119,8 @@ export default function AssignmentEditor() {
         {/* Complete on your own */}
       </table>
       <hr />
-      <div align="right">
-      <button >
+      <div style={{ textAlign: "right" }}>
+      <button>
         Cancel
       </button>
       

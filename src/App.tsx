@@ -1,35 +1,22 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
-
+import { HashRouter,Route,Routes,Navigate } from "react-router";
+import Lab1 from "./Labs/Lab1";
+import Lab2 from "./Labs/Lab2";
+import Labs from "./Labs";
+import Kambaz from "./kambaz";
 function App() {
-  const [count, setCount] = useState(0)
-
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    <HashRouter>
+  <div>
+    <Routes>
+      <Route path="/" element={<Navigate to="/Labs" />} />
+      <Route path="Labs" element={<Labs/>}/>
+      <Route path="Labs/Lab1" element={<Lab1 />}/>
+      <Route path="Labs/Lab2" element={<Lab2 />}/>
+      <Route path="/Kambaz/*" element={<Kambaz/>}  />
+    </Routes>
+  </div>
+  </HashRouter>
+  );
 }
 
-export default App
+export default App;

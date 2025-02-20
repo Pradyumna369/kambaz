@@ -1,94 +1,77 @@
 import { Link } from "react-router-dom";
+import { Row, Col, Card, Button } from "react-bootstrap";
+
 export default function Dashboard() {
   return (
     <div id="wd-dashboard">
       <h1 id="wd-dashboard-title">Dashboard</h1> <hr />
       <h2 id="wd-dashboard-published">Published Courses (12)</h2> <hr />
       <div id="wd-dashboard-courses">
-        <div className="wd-dashboard-course">
-          <Link to="/Kambaz/Courses/1234/Home"      //All elements are linked to home in this component
-                className="wd-dashboard-course-link" >
-            <img src="/images/reactjs.jpg" width={200} />
-            <div>
-              <h5> CS1234 React JS </h5>
-              <p className="wd-dashboard-course-title">
-                Full Stack software developer  </p>
-              <button> Go </button>
-            </div>
-          </Link>
-        </div>
-        <div className="wd-dashboard-course">
-          <Link to="/Kambaz/Courses/1234/Home"      //All elements are linked to home in this component
-                className="wd-dashboard-course-link" >
-            <img src="/images/ConnectedDevices.jpg" width={200} />
-            <div>
-              <h5> TELE6530 Connected Devices </h5>
-              <p className="wd-dashboard-course-title">
-                IOT engineer  </p>
-              <button> Go </button>
-            </div>
-          </Link>
-        </div>
-        <div className="wd-dashboard-course">
-          <Link to="/Kambaz/Courses/1234/Home"      //All elements are linked to home in this component
-                className="wd-dashboard-course-link" >
-            <img src="/images/j2ee.jpeg" width={200} />
-            <div>
-              <h5> CSYE6220 Enterprise Software Design </h5>
-              <p className="wd-dashboard-course-title">
-                Backend Developer  </p>
-              <button> Go </button>
-            </div>
-          </Link>
-        </div>
-        <div className="wd-dashboard-course">
-          <Link to="/Kambaz/Courses/1234/Home"      //All elements are linked to home in this component
-                className="wd-dashboard-course-link" >
-            <img src="/images/java.png" width={200} />
-            <div>
-              <h5> CSYE6220 Concepts of Object Oriented Design </h5>
-              <p className="wd-dashboard-course-title">
-                Java Developer  </p>
-              <button> Go </button>
-            </div>
-          </Link>
-        </div>
-        <div className="wd-dashboard-course">
-          <Link to="/Kambaz/Courses/1234/Home"      //All elements are linked to home in this component
-                className="wd-dashboard-course-link" >
-            <img src="/images/psa.jpeg" width={200} />
-            <div>
-              <h5> INFO6205 Program Structures and Algorithms </h5>
-              <p className="wd-dashboard-course-title">
-                Leetcode  </p>
-              <button> Go </button>
-            </div>
-          </Link>
-        </div>
-        <div className="wd-dashboard-course">
-          <Link to="/Kambaz/Courses/1234/Home"      //All elements are linked to home in this component
-                className="wd-dashboard-course-link" >
-            <img src="/images/networking.jpeg" width={200} />
-            <div>
-              <h5> TELE5330 Data Networking </h5>
-              <p className="wd-dashboard-course-title">
-                Network engineer  </p>
-              <button> Go </button>
-            </div>
-          </Link>
-        </div>
-        <div className="wd-dashboard-course">
-          <Link to="/Kambaz/Courses/1234/Home"      //All elements are linked to home in this component
-                className="wd-dashboard-course-link" >
-            <img src="/images/webdev.jpeg" width={200} />
-            <div>
-              <h5> INFO6150 Web Design/User Experience </h5>
-              <p className="wd-dashboard-course-title">
-                Web developer  </p>
-              <button> Go </button>
-            </div>
-          </Link>
-        </div>
+        <Row xs={1} md={3} lg={4} className="g-4">
+          {[
+            {
+              title: "CS1234 React JS",
+              description: "Full Stack software developer",
+              imgSrc: "/images/reactjs.jpg",
+            },
+            {
+              title: "TELE6530 Connected Devices",
+              description: "IOT Engineer",
+              imgSrc: "/images/ConnectedDevices.jpg",
+            },
+            {
+              title: "CSYE6220 Enterprise Software Design",
+              description: "Backend Developer",
+              imgSrc: "/images/j2ee.jpeg",
+            },
+            {
+              title: "CSYE6220 Concepts of Object Oriented Design",
+              description: "Java Developer",
+              imgSrc: "/images/java.png",
+            },
+            {
+              title: "INFO6205 Program Structures and Algorithms",
+              description: "Leetcode",
+              imgSrc: "/images/psa.jpeg",
+            },
+            {
+              title: "TELE5330 Data Networking",
+              description: "Network Engineer",
+              imgSrc: "/images/networking.jpeg",
+            },
+            {
+              title: "INFO6150 Web Design/User Experience",
+              description: "Web Developer",
+              imgSrc: "/images/webdev.jpeg",
+            },
+          ].map((course, index) => (
+            <Col key={index} className="wd-dashboard-course">
+              <Card style={{ width: "300px" }}>
+                <Link
+                  to="/Kambaz/Courses/1234/Home"
+                  className="wd-dashboard-course-link text-decoration-none text-dark"
+                >
+                  <Card.Img
+                    variant="top"
+                    src={course.imgSrc}
+                    width="100%"
+                    height={160}
+                  />
+                  <Card.Body>
+                    <Card.Title className="wd-dashboard-course-title">
+                      {course.title}
+                    </Card.Title>
+                    <Card.Text className="wd-dashboard-course-description">
+                      {course.description}
+                    </Card.Text>
+                    <Button variant="primary">Go</Button>
+                  </Card.Body>
+                </Link>
+              </Card>
+            </Col>
+          ))}
+        </Row>
       </div>
     </div>
-);}
+  );
+}

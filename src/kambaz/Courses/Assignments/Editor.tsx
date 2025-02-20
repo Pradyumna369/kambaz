@@ -116,7 +116,6 @@ export default function AssignmentEditor() {
         </tr>
         <br />
 
-        {/* Complete on your own */}
       </table>
       <hr />
       <div style={{ textAlign: "right" }}>

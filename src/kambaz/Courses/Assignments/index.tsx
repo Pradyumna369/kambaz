@@ -1,13 +1,17 @@
 import { CiSearch } from "react-icons/ci";
-import { Button, ListGroup } from "react-bootstrap";
+import { Button } from "react-bootstrap";
 import { FaPlus } from "react-icons/fa6";
-import { BsGripVertical, BsPlus } from "react-icons/bs";
+import { BsGripVertical } from "react-icons/bs";
 import LessonControlButtons from "../Modules/LessonControlButtons";
 import AssignmentsControlButtons from "./AssignmentsControlButtons";
-import AssignmentContent from "./AssignmentContent";
 import { FaRegEdit } from "react-icons/fa";
+import { useParams } from "react-router";
+import * as db from "../../Database";
+
 
 export default function Assignments() {
+    const {cid} = useParams();
+    const assignments = db.assignments;
     return (
       <div id="wd-assignments">
         <CiSearch className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400"/>
@@ -21,50 +25,42 @@ export default function Assignments() {
           Group
         </Button>
         <br /><br /><br />
-        <ListGroup className="rounded-0" id="wd-modules">
-            <ListGroup.Item className="wd-module p-0 mb-5 fs-5 border-gray">
-              <div className="wd-title p-3 ps-2 bg-secondary"> 
-                <BsGripVertical className="me-2 fs-3" />Assignments  <AssignmentsControlButtons />
-                </div>
-              <ListGroup className="wd-lessons rounded-0">
-              <ListGroup.Item className="wd-lesson d-flex">
-  {/* Grip Icon (Left) */}
-  <div className="me-3 fs-3 align-self-center " >
-    <BsGripVertical className="me-2 fs-3"/>
-    <FaRegEdit className="me-1 text-success" />
-  </div>
-
-  {/* Content (Expands and aligns correctly) */}
-  <div className="align-self-center flex-grow-1 ">
-    <a href="#/kambaz/Courses/1234/Assignments/123">
-      A1 - ENV + HTML 
-    </a>
-    <br />
-    <span className="wd-float-left text-danger me-1">
-      Multiple module
-    </span>
-    <span>
-      | <b>Not available until</b> May 6 at 12:00 AM | <br />
-      <b>Due</b> May 13 at 11:59pm | 100pts
-    </span>
-  </div>
-
-  {/* Right Side (Checkmark & Dots) */}
-  <div className="align-self-center">
-    <LessonControlButtons />
-  </div>
-</ListGroup.Item>
-
- 
-                <ListGroup.Item className="wd-lesson p-3 ps-1">
-                <BsGripVertical className="me-2 fs-3" />A2 <LessonControlButtons />
-                </ListGroup.Item>
-                <ListGroup.Item className="wd-lesson p-3 ps-1">
-                <BsGripVertical className="me-2 fs-3" /> A3 <LessonControlButtons />
-                </ListGroup.Item>
-              </ListGroup>
-            </ListGroup.Item>
-        </ListGroup>
-        
+        <ul id="wd-modules" className="list-group rounded-0">
+          {(
+            <li className="list-group-item wd-module p-0 mb-5 fs-5 border-gray">
+            <div className="wd-title p-3 ps-2 bg-secondary"> 
+              <BsGripVertical className="me-2 fs-3" />Assignments  <AssignmentsControlButtons />
+            </div>
+          {
+            assignments.filter((assignment:any) => assignment.course === cid)
+            .map((assignment:any) => (
+              <li className="list-group-item wd-lesson d-flex">  
+                  <div className="me-3 fs-3 align-self-center " >
+                    <BsGripVertical className="me-2 fs-3"/>
+                    <FaRegEdit className="me-1 text-success" />
+                  </div>
+                  <div className="align-self-center flex-grow-1 ">
+                    <a href="#/kambaz/Courses/1234/Assignments/123">
+                      {assignment.title} 
+                    </a>
+                    <br />
+                    <span className="wd-float-left text-danger me-1">
+                      Multiple module
+                    </span>
+                    <span>
+                      | <b>Not available until</b> May 6 at 12:00 AM | <br />
+                      <b>Due</b> May 13 at 11:59pm | 100pts
+                    </span>
+                  </div>
+                  <div className="align-self-center">
+                    <LessonControlButtons />
+                  </div>
+              </li>
+            ))
+          }
+          </li>
+          )
+          }
+        </ul>   
       </div>
   );}

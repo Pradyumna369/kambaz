@@ -1,5 +1,3 @@
-import ModulesControls from "./ModulesControls";
-import { ListGroup } from "react-bootstrap";
 import { BsGripVertical } from "react-icons/bs";
 import ModulesControlButtons from "./ModuleControlButtons";
 import LessonControlButtons from "./LessonControlButtons";

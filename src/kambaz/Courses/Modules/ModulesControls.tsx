@@ -1,5 +1,5 @@
 import { FaPlus } from "react-icons/fa6";
-import GreenCheckMark from "./GreenCheckMark";
+import GreenCheckmark from "./GreenCheckmark";
 import { Button, Dropdown } from "react-bootstrap";
 
 
@@ -12,22 +12,22 @@ const ModulesControls = () => {
         </Button>
         <Dropdown className="float-end me-2">
             <Dropdown.Toggle variant="secondary"  id="wd-publish-all-btn" className="rounded-1 fs-md">
-                < GreenCheckMark /> Publish All
+                < GreenCheckmark /> Publish All
             </Dropdown.Toggle>
             <Dropdown.Menu>
                 <Dropdown.Item id="wd-publish-all">
-                    < GreenCheckMark /> Publish All
+                    < GreenCheckmark /> Publish All
                 </Dropdown.Item>
                 <Dropdown.Item id="wd-publish-all-modules-and-items">
-                    < GreenCheckMark /> Publish all modules and items</Dropdown.Item>
+                    < GreenCheckmark /> Publish all modules and items</Dropdown.Item>
                 <Dropdown.Item id="wd-publish-modules-only">
-                    <GreenCheckMark /> Publish modules only
+                    <GreenCheckmark /> Publish modules only
                 </Dropdown.Item>
                 <Dropdown.Item id="wd-unpublish-all-modules-and-items">
-                    <GreenCheckMark /> Unpublish all modules and items
+                    <GreenCheckmark /> Unpublish all modules and items
                 </Dropdown.Item>
                 <Dropdown.Item id="wd-unpublish-modules-only">
-                    <GreenCheckMark /> Unpublish modules only
+                    <GreenCheckmark /> Unpublish modules only
                 </Dropdown.Item>
             </Dropdown.Menu>
             

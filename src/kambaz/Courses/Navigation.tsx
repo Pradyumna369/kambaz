@@ -1,5 +1,4 @@
 import { Link, useParams, useLocation } from "react-router-dom";
-import { courses } from "../Database";
 
 export default function CourseNavigation() {
     const { cid } = useParams();

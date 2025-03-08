@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { Row, Col, Card, Button } from "react-bootstrap";
+import { Row, Col, Card } from "react-bootstrap";
 import * as db from "./Database";
 
 export default function Dashboard() {

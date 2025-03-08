@@ -1,5 +1,5 @@
 import { IoEllipsisVertical } from "react-icons/io5";
-import GreenCheckmark from "./GreenCheckMark";
+import GreenCheckmark from "./GreenCheckmark";
 const LessonControlButtons = () => {
   return (
     <div className="float-end">

@@ -6,8 +6,8 @@ import Home from "./Home";
 import Assignments from "./Assignments";
 import AssignmentEditor from "./Assignments/Editor";
 import PeopleTable from "./People/Table";
-import { courses } from "../Database";
-export default function Courses() {
+
+export default function Courses({ courses }: { courses: any[]; }) {
     const { cid } = useParams();
     const { pathname } = useLocation();
     const course = courses.find((course) => course._id ===cid);

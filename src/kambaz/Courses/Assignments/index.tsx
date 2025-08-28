@@ -7,11 +7,16 @@ import AssignmentsControlButtons from "./AssignmentsControlButtons";
 import { FaRegEdit } from "react-icons/fa";
 import { useParams } from "react-router";
 import * as db from "../../Database";
-
+import { addAssignment, editAssignment, deleteAssignment, updateAssignment } from "./reducer";
+import { UseSelector, useDispatch, useSelector } from "react-redux";
+import { useState } from "react";
 
 export default function Assignments() {
     const {cid} = useParams();
     const assignments = db.assignments;
+    const [assignmentName, setAssignmentName] = useState("");
+    // const {assignments} = useSelector((state:any) => state.assignmentReducers);
+    const dispatch = useDispatch();
     return (
       <div id="wd-assignments">
         <CiSearch className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400"/>

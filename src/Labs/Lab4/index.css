@@ -1,0 +1,19 @@
+#wd-life-is-good-click {
+    color: rgb(209, 87, 31);
+    background-color:blanchedalmond;
+    border-color:brown;
+    border-radius: 10px;
+}
+
+#wd-life-is-great-click {
+    color: rgb(3, 84, 19);
+    background-color:aquamarine;
+    border-radius: 10px;
+    border-color: rgb(0, 62, 11);
+}
+
+#wd-click-event button{
+    gap: 16px;
+    margin-bottom: 20px;
+    margin-left: 16px;
+}

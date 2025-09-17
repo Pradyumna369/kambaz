@@ -1,5 +1,4 @@
 import Lab1 from "./Lab1";
-import Lab2 from "./Lab2";
 import TOC from "./TOC";
 export default function Labs() {
     return (
@@ -7,7 +6,7 @@ export default function Labs() {
             <h1>Labs</h1>
             <TOC/>
             <Lab1 />
-            <Lab2 />
+            
         </div>
     );
 }

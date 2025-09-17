@@ -16,8 +16,8 @@ function App() {
       <Route path="/" element={<Navigate to="/Kambaz" />} />
       <Route path="Labs" element={<Labs/>}/>
       <Route path="Labs/Lab1" element={<Lab1 />}/>
-      <Route path="Labs/Lab2" element={<Lab2 />}/>
       <Route path="Labs/Lab4" element={<Lab4/>}/>
+      <Route path="Labs/Lab2" element={<Lab2 />}/>
       <Route path="/Kambaz/*" element={<Kambaz/>}  />
     </Routes>
   </div>

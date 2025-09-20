@@ -6,21 +6,13 @@ import LessonControlButtons from "../Modules/LessonControlButtons";
 import AssignmentsControlButtons from "./AssignmentsControlButtons";
 import { FaRegEdit } from "react-icons/fa";
 import { useParams } from "react-router";
-import * as db from "../../Database";
-import { addAssignment, editAssignment, deleteAssignment, updateAssignment } from "./reducer";
-import { UseSelector, useDispatch, useSelector } from "react-redux";
-import { useState } from "react";
+import { useSelector } from "react-redux";
 
 export default function Assignments() {
     const {cid} = useParams();
-    // const assignments = db.assignments;
-    // const [assignmentName, setAssignmentName] = useState("");
+
     const assignments = useSelector((state:any) => 
       state.assignmentsReducer.assignments.filter((a : any) => a.course === cid)
-    );
-    const dispatch = useDispatch();
-    const currentUser = useSelector(
-      (state : any) => state.accountReducer.currentUser
     );
 
     return (

@@ -51,7 +51,7 @@ export default function Signin() {
       <br />
       {/* Clicking th eabove button will take you to Dashboard
              As it is the default route set */}
-      <Link id="wd-signup-link" to="/kambas/Account/Signup">
+      <Link id="wd-signup-link" to="/kambaz/Account/Signup">
         Sign up
       </Link>
     </div>

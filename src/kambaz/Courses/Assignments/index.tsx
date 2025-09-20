@@ -6,28 +6,26 @@ import LessonControlButtons from "../Modules/LessonControlButtons";
 import AssignmentsControlButtons from "./AssignmentsControlButtons";
 import { FaRegEdit } from "react-icons/fa";
 import { useParams } from "react-router";
-import * as db from "../../Database";
-import { addAssignment, editAssignment, deleteAssignment, updateAssignment } from "./reducer";
-import { UseSelector, useDispatch, useSelector } from "react-redux";
-import { useState } from "react";
+import { useSelector } from "react-redux";
 
 export default function Assignments() {
     const {cid} = useParams();
-    const assignments = db.assignments;
-    const [assignmentName, setAssignmentName] = useState("");
-    // const {assignments} = useSelector((state:any) => state.assignmentReducers);
-    const dispatch = useDispatch();
+
+    const assignments = useSelector((state:any) => 
+      state.assignmentsReducer.assignments.filter((a : any) => a.course === cid)
+    );
+
     return (
       <div id="wd-assignments">
         <CiSearch className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400"/>
         <input placeholder=" Search..." id="wd-search-assignment" className="border rounded-1 pl-10 pr-2 py-2 w-full focus:outline-none focus:ring-2 focus:ring-blue-500"></input>
         <Button variant="danger" className="me-1 float-end rounded-1 fs-md" id="wd-add-assignment-group">
           <FaPlus className="position-relative me-2" style={{ bottom: "1px" }} />
-          Assignment
+           Assignment
         </Button>
         <Button variant="secondary" className="me-1 float-end rounded-1 fs-md" id="wd-add-assignment-group">
           <FaPlus className="position-relative me-2" style={{ bottom: "1px" }} />
-          Group
+           Group
         </Button>
         <br /><br /><br />
         <ul id="wd-modules" className="list-group rounded-0">

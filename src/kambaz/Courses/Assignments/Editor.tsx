@@ -44,6 +44,7 @@ export default function AssignmentEditor() {
         dueDate,
         availableFrom,
         availableUntil,
+        selectedOption,
         course: cid, 
       };
 

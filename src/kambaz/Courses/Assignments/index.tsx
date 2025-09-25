@@ -5,10 +5,9 @@ import { BsGripVertical } from "react-icons/bs";
 import LessonControlButtons from "../Modules/LessonControlButtons";
 import AssignmentsControlButtons from "./AssignmentsControlButtons";
 import { FaRegEdit, FaTrash } from "react-icons/fa";
-import { Link, Links, useParams, Navigate, useNavigate } from "react-router";
-import { addAssignment, editAssignment, deleteAssignment, updateAssignment } from "./reducer";
-import { UseSelector, useDispatch, useSelector } from "react-redux";
-import { useEffect, useState } from "react";
+import { useParams, useNavigate } from "react-router";
+import { deleteAssignment} from "./reducer";
+import { useDispatch, useSelector } from "react-redux";
 
 export default function Assignments() {
     const {cid} = useParams();

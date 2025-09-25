@@ -1,4 +1,3 @@
-import React from 'react';
 import HelloRedux from './HelloRedux';
 import CounterRedux from './CounterReducer';
 import AddReducer from './AddReducer';

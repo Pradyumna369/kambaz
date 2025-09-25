@@ -1,4 +1,4 @@
-import { useDispatch, UseDispatch, useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useState } from "react";
 import {add} from "./addReducer";
 export default function AddReducer() {

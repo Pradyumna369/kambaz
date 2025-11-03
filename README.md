@@ -2,7 +2,7 @@ Kambaz
 
 Kambaz is a simple Learning Management System (LMS) built with React and TypeScript. It allows instructors to create and manage courses, modules, and assignments, while students can view their enrolled courses, check modules, and track grades.
 
-🚀 Features
+Features:
 
 Add and manage courses and modules
 
@@ -14,7 +14,7 @@ Uses React hooks and Redux for state management
 
 Fast development setup with Vite
 
-🧰 Tech Stack
+Tech Stack:
 
 Frontend: React, TypeScript, Vite
 

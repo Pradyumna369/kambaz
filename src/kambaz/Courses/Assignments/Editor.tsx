@@ -1,7 +1,9 @@
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router";
 import { useEffect, useState } from "react";
-import { updateAssignment, addAssignment } from "./reducer";
+import { addAssignment } from "./reducer";
+import * as assignmentsClient from "./client";
+import { updateAssignment } from "./reducer";
 
 export default function AssignmentEditor() {
     const { cid, aid } = useParams();
@@ -18,7 +20,7 @@ export default function AssignmentEditor() {
     const [availableUntil, setAvailableUntil] = useState(assignment?.availableUntil || "");
     const [points, setPoints] = useState(assignment?.points || "");
     const [selectedOption, setSelectedOption] = useState("");
-
+    
     useEffect(() => {
       if(assignment) {
         setTitle(assignment.title);
@@ -49,9 +51,11 @@ export default function AssignmentEditor() {
       };
 
       if(assignment) {
+        assignmentsClient.updateAssignment(updatedAssignment);
         dispatch(updateAssignment(updatedAssignment));
       } else {
-        dispatch(addAssignment(updatedAssignment))
+        assignmentsClient.createAssignementForCourse(updatedAssignment);
+        dispatch(addAssignment(updatedAssignment));
       }
       navigate(-1);
     }

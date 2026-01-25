@@ -6,27 +6,39 @@ import LessonControlButtons from "../Modules/LessonControlButtons";
 import AssignmentsControlButtons from "./AssignmentsControlButtons";
 import { FaRegEdit, FaTrash } from "react-icons/fa";
 import { useParams, useNavigate } from "react-router";
-import { deleteAssignment} from "./reducer";
+import { deleteAssignment, setAssignments} from "./reducer";
 import { useDispatch, useSelector } from "react-redux";
+import * as assignmentsClient from "./client";
+import { useLayoutEffect } from "react";
 
 export default function Assignments() {
     const {cid} = useParams();
     const navigate = useNavigate();
     const assignments = useSelector((state:any) => 
-      state.assignmentsReducer.assignments.filter((a : any) => a.course === cid)
+      state.assignmentsReducer.assignments
     );
+
     const dispatch = useDispatch();
-    //const [currentUser, setCurrentUser] = useState<currentUser | null>(null);
+
     const currentUser = useSelector(
       (state : any) => state.accountReducer.currentUser
     );
-   // setCurrentUser(user);
 
    const handleDelete = (assignment:any) => {
     if (window.confirm("Are you sure you want to delete the assignment?")){
-    dispatch(deleteAssignment(assignment._id))
+      assignmentsClient.deleteAssignment(assignment._id);
+      dispatch(deleteAssignment(assignment._id))
     }
    }
+
+   const fetchAssignments = async() => {
+    const assignments = await assignmentsClient.fetchAssignmentsForCourse(cid as string);
+    dispatch(setAssignments(assignments));
+   };
+
+   useLayoutEffect(() => {
+    fetchAssignments();
+   },[]);
 
     return (
       <div id="wd-assignments">
@@ -58,7 +70,8 @@ export default function Assignments() {
                   <div className="me-3 fs-3 align-self-center " >
                     <BsGripVertical className="me-2 fs-3"/>
                     {currentUser.role === "FACULTY" &&
-                    (<FaRegEdit className="me-1 text-success" onClick={() => navigate(`/kambaz/Courses/${cid}/Assignments/${assignment._id}`)}/>)}
+                    (<FaRegEdit className="me-1 text-success" 
+                    onClick={() => navigate(`/kambaz/Courses/${cid}/Assignments/${assignment._id}`)}/>)}
                   </div>
                   <div className="align-self-center flex-grow-1 ">
                       <a href={`#/kambaz/Courses/${cid}/Assignments/${assignment._id}`}>

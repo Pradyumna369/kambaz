@@ -27,11 +27,10 @@ export default function Modules() {
       const newModule = {name: moduleName, course: cid};
       const createdModule = await courseClient.createModuleForCourse(cid, newModule);
       dispatch(addModule(createdModule));
-    }
+    };
     const fetchModules = async() => {
       const modules = await courseClient.findModulesForCourse(cid as string);
       dispatch(setModules(modules));
-      console.log("modules are:", modules);
     };
     useEffect(() => {
       fetchModules();

@@ -48,6 +48,10 @@ export default function Kambaz() {
       console.error(error);
     }
   };
+  const unenrollFromCourse = async(courseId: string) => {
+    await userClient.unenrollFromCourse(currentUser, courseId);
+    fetchCourses();
+  };
   useEffect(() => {
     fetchCourses();
   },[currentUser]);
@@ -67,7 +71,9 @@ export default function Kambaz() {
                   setCourse={setCourse}
                   addNewCourse={addNewCourse}
                   deleteCourse={deleteCourse}
-                  updateCourse={updateCourse}/>
+                  updateCourse={updateCourse}
+                  unenrollFromCourse={unenrollFromCourse}
+                  />
                 </ProtectedRoute>
                   } />
               <Route path="/Courses/:cid/*" element={

@@ -45,5 +45,13 @@ export const unenrollFromCourse = async(user: any, courseId:string) => {
     } catch(error) {
         console.error(error);
     }
-    
+}
+
+export const enrollInCourse = async(user: any, courseId:string) => {
+    try{
+        const {data} = await axiosWithCredentials.post(`${USERS_API}/enrollments/${user._id}/${courseId}`);
+        return data;
+    } catch(error) {
+        console.error(error);
+    }
 }

@@ -1,20 +1,33 @@
 import { Link } from "react-router-dom";
 import { Row, Col, Card } from "react-bootstrap";
 import { useSelector } from "react-redux";
-import * as db from "./Database/index.js";
 
 export default function Dashboard(
   { courses, course, setCourse, addNewCourse,
-    deleteCourse, updateCourse, unenrollFromCourse }: {
+    deleteCourse, updateCourse, unenrollFromCourse, showEnrollments, setShowEnrollments,
+    enrollInCourse, enrollments }: {
     courses: any[]; course: any; setCourse: (course: any) => void;
     addNewCourse: () => void; deleteCourse: (course: any) => void;
-    updateCourse: () => void; unenrollFromCourse: (courseId: string) => void; }
+    updateCourse: () => void; unenrollFromCourse: (courseId: string) => void;
+    showEnrollments?: boolean; setShowEnrollments?: (showEnrollments: boolean) => void;
+    enrollInCourse: (courseId: string) => void; enrollments: any[] }
   ) {
     const { currentUser } = useSelector((state: any) => state.accountReducer);
-    const  enrollments = db.enrollments;
+    const showAllCourses = () => {
+      setShowEnrollments && setShowEnrollments(!showEnrollments);
+    }
+
   return (
     <div id="wd-dashboard">
-      <h1 id="wd-dashboard-title">Dashboard</h1> 
+      <div id="wd-dashboard-welcome" className="d-flex justify-content-between">
+        <h1 id="wd-dashboard-title">Dashboard</h1> 
+        {
+          currentUser && currentUser.role === "STUDENT" && (
+            <h2>Welcome, {currentUser.firstName} {currentUser.lastName}</h2>
+          )
+        }
+      </div>
+      
       <hr />
       {
         currentUser && currentUser.role === "FACULTY" && (
@@ -37,7 +50,24 @@ export default function Dashboard(
       }
       {
         currentUser && currentUser.role === "STUDENT" && (
-          <h2>Enrolled Courses ({courses.length})</h2>
+          <div id="wd-dashboard-welcome" className="d-flex justify-content-between">
+            {
+              showEnrollments ? (
+                <h2>My Courses ({courses.length})</h2>
+              ) : ( <h2> All Courses ({courses.length}) </h2>)
+            }
+            
+            
+          {
+            currentUser && currentUser.role === "STUDENT" && (
+              <button className="btn btn-primary float-end" onClick={() => {
+                showAllCourses();
+              }}>
+                Enrollments
+              </button>
+            )
+          }
+      </div>
         )
       }
       {
@@ -48,10 +78,10 @@ export default function Dashboard(
       <div id="wd-dashboard-courses">
         <Row xs={1} md={3} lg={4} className="g-4">
           {courses
-          .filter((course) =>
-            enrollments.some((enrollment) =>
-              enrollment.course === course._id &&
-              enrollment.user === currentUser._id))
+          // .filter((course) =>
+          //   enrollments.some((enrollment) =>
+          //     enrollment.course === course._id &&
+          //     enrollment.user === currentUser._id))
           .map((course, index) => (
             <Col key={index} className="wd-dashboard-course" style={{ width:"300px" }}>
               <Card>
@@ -71,7 +101,8 @@ export default function Dashboard(
                       {course.description} </p>
                     <button className="btn btn-primary">Go</button>
                     {
-                      currentUser.role === "FACULTY" && (
+                      currentUser.role === "FACULTY" && 
+                       (
                         <>
                           <button onClick={(event) => {
                             event.preventDefault();
@@ -93,6 +124,10 @@ export default function Dashboard(
                     }
                     {
                       currentUser.role === "STUDENT" && (
+                      (enrollments.some((enrollment) =>
+                        enrollment.course === course._id &&
+                        enrollment.user === currentUser._id))?
+                      (
                         <button onClick={(event) => {
                             event.preventDefault();
                             unenrollFromCourse(course._id);
@@ -101,7 +136,17 @@ export default function Dashboard(
                           id="wd-delete-course-click">
                             Unenroll
                         </button>
-                      )
+                      ) : 
+                      (
+                        <button onClick={(event) => {
+                            event.preventDefault();
+                            enrollInCourse(course._id);
+                          }}
+                          className="btn btn-success float-end"
+                          id="wd-delete-course-click">
+                            Enroll
+                        </button>
+                      ))
                     }
                     
                   </div>

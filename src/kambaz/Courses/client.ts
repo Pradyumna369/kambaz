@@ -26,3 +26,9 @@ export const findModulesForCourse = async(cid:string) => {
     const {data} = await axios.get(`${COURSES_API}/${cid}/modules`);
     return data;
 };
+
+export const findEnrollmentsForUser = async(uid:string) => {
+    const {data} = await axios.get(`${COURSES_API}/enrollments/${uid}`);
+    console.log(data);
+    return data;
+};

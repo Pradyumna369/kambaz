@@ -13,6 +13,8 @@ import { useSelector } from "react-redux";
 
 export default function Kambaz() {
   const [courses, setCourses] = useState<any[]>([]);
+  const [showEnrollments, setShowEnrollments] = useState<boolean>(true);
+  const [enrollments, setEnrollments] = useState<any[]>([]);
   const {currentUser} = useSelector((state:any) => state.accountReducer);
   const [course, setCourse] = useState<any>({
     _id: "0", name: "New Course", number: "New Number",startDate: "2023-09-10", endDate: "2023-12-15",
@@ -42,19 +44,39 @@ export default function Kambaz() {
   };
   const fetchCourses = async() => {
     try{
-      const courses = await userClient.findMyCourses();
-      setCourses(courses);
+      if (showEnrollments) {
+        const courses = await userClient.findMyCourses();
+        setCourses(courses);
+      } else {
+        const courses = await courseClient.fetchAllCourses();
+        setCourses(courses);
+      }
     } catch(error) {
       console.error(error);
     }
   };
+
   const unenrollFromCourse = async(courseId: string) => {
     await userClient.unenrollFromCourse(currentUser, courseId);
     fetchCourses();
+    findEnrollmentsForUser();
   };
+
+  const enrollInCourse = async(courseId: string) => {
+    await userClient.enrollInCourse(currentUser, courseId);
+    fetchCourses();
+    findEnrollmentsForUser();
+  };
+
+  const findEnrollmentsForUser = async() => {
+    const enrollments = await courseClient.findEnrollmentsForUser(currentUser?._id || "");
+    setEnrollments(enrollments);
+  };
+
   useEffect(() => {
     fetchCourses();
-  },[currentUser]);
+    findEnrollmentsForUser();
+  },[currentUser, showEnrollments]);
   return (
     <Session>
     <div id="wd-kambaz">
@@ -73,6 +95,10 @@ export default function Kambaz() {
                   deleteCourse={deleteCourse}
                   updateCourse={updateCourse}
                   unenrollFromCourse={unenrollFromCourse}
+                  showEnrollments={showEnrollments}
+                  setShowEnrollments={setShowEnrollments}
+                  enrollInCourse={enrollInCourse}
+                  enrollments={enrollments}
                   />
                 </ProtectedRoute>
                   } />

@@ -28,7 +28,12 @@ export const findModulesForCourse = async(cid:string) => {
 };
 
 export const findEnrollmentsForUser = async(uid:string) => {
-    const {data} = await axios.get(`${COURSES_API}/enrollments/${uid}`);
+    const {data} = await axios.get(`${REMOTE_SERVER}/api/users/enrollments/${uid}`);
     console.log(data);
+    return data;
+};
+
+export const findEnrollmentsForCourse = async(cid:string) => {
+    const {data} = await axios.get(`${COURSES_API}/enrollments/${cid}`);
     return data;
 };

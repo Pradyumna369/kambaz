@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { Row, Col, Card } from "react-bootstrap";
 import { useSelector } from "react-redux";
+import { FaHandMiddleFinger } from "react-icons/fa6";
 
 export default function Dashboard(
   { courses, course, setCourse, addNewCourse,
@@ -55,9 +56,7 @@ export default function Dashboard(
               showEnrollments ? (
                 <h2>My Courses ({courses.length})</h2>
               ) : ( <h2> All Courses ({courses.length}) </h2>)
-            }
-            
-            
+            } 
           {
             currentUser && currentUser.role === "STUDENT" && (
               <button className="btn btn-primary float-end" onClick={() => {
@@ -78,10 +77,6 @@ export default function Dashboard(
       <div id="wd-dashboard-courses">
         <Row xs={1} md={3} lg={4} className="g-4">
           {courses
-          // .filter((course) =>
-          //   enrollments.some((enrollment) =>
-          //     enrollment.course === course._id &&
-          //     enrollment.user === currentUser._id))
           .map((course, index) => (
             <Col key={index} className="wd-dashboard-course" style={{ width:"300px" }}>
               <Card>
@@ -95,7 +90,7 @@ export default function Dashboard(
                     height={160}
                   />
                   <div className="card-body">
-                    <h5 className="wd-dashboard-course-title card-title">
+                    <h5 className="wd-dashboard-course-title card-title" style={{maxLines: 1, overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap"}}>
                       {course.name}</h5>
                     <p className="wd-dashboard-course-title card-text overflow-y-hidden" style={{maxHeight:100}}>
                       {course.description} </p>
@@ -125,8 +120,7 @@ export default function Dashboard(
                     {
                       currentUser.role === "STUDENT" && (
                       (enrollments.some((enrollment) =>
-                        enrollment.course === course._id &&
-                        enrollment.user === currentUser._id))?
+                        enrollment.course === course._id ))?
                       (
                         <button onClick={(event) => {
                             event.preventDefault();

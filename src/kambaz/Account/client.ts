@@ -55,3 +55,8 @@ export const enrollInCourse = async(user: any, courseId:string) => {
         console.error(error);
     }
 }
+
+export const findAllUsers = async() => {
+    const {data} = await axios.get(USERS_API);
+    return data;
+}

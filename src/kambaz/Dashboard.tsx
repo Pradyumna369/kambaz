@@ -1,7 +1,6 @@
 import { Link } from "react-router-dom";
 import { Row, Col, Card } from "react-bootstrap";
 import { useSelector } from "react-redux";
-import { FaHandMiddleFinger } from "react-icons/fa6";
 
 export default function Dashboard(
   { courses, course, setCourse, addNewCourse,

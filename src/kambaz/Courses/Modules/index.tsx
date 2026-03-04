@@ -34,7 +34,7 @@ export default function Modules() {
     };
     useEffect(() => {
       fetchModules();
-    },[]);
+    }, []);
     return (        
           <div className="wd-modules">
           <ModulesControls
